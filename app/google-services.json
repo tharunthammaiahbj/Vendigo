@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "651407862021",
+    "project_id": "vendigo-e9487",
+    "storage_bucket": "vendigo-e9487.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651407862021:android:c8b8612c2643e8d4eaef6c",
+        "android_client_info": {
+          "package_name": "com.example.vendigo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm9pZx-vETxQDV24qC4XYR973OfF84I9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
