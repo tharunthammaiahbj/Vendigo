@@ -36,6 +36,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import com.example.vendigo.R
 import com.example.vendigo.navigation.VendigoScreens
@@ -132,15 +133,18 @@ fun OtpVerifyScreen(navController: NavController){
                      TextField(
                         value = otpDigit,
                         onValueChange = {
-                            value -> otp[index] = value.takeLast(1)
-                            otpDigit = value
-                            if (value.length == 1 && index < 5){
+                            value ->
+//                            otp[index] = value.takeLast(1)
+                            if(value.length <= 1 && value.isDigitsOnly()){
+                                otpDigit = value
+                            }
+                            if (value.length == 1 && index < 5 && value.isDigitsOnly()){
                                 focusRequesters[index+1].requestFocus()
                             }
                         },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number,
-                            imeAction = if(index < 5) ImeAction.Done else ImeAction.Next),
+                            imeAction = if(index == 5) ImeAction.Done else ImeAction.Next),
                         keyboardActions = KeyboardActions(
                             onNext = {
                                 if(index < 5){
