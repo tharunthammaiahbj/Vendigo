@@ -134,16 +134,16 @@ fun OtpVerifyScreen(navController: NavController){
                         onValueChange = {
                             value -> otp[index] = value.takeLast(1)
                             otpDigit = value
-                            if (value.length == 1 && index < 6){
+                            if (value.length == 1 && index < 5){
                                 focusRequesters[index+1].requestFocus()
                             }
                         },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number,
-                            imeAction = if(index == 5) ImeAction.Done else ImeAction.Next),
+                            imeAction = if(index < 5) ImeAction.Done else ImeAction.Next),
                         keyboardActions = KeyboardActions(
                             onNext = {
-                                if(index < 6){
+                                if(index < 5){
                                     focusRequesters[index+1].requestFocus()
                                 }
                             },
