@@ -142,6 +142,7 @@ fun OtpVerifyScreen(navController: NavController){
                                 otpDigit = value
                             }
                             if (value.length == 1 && index < 5 && value.isDigitsOnly()){
+
                                 focusRequesters[index+1].requestFocus()
                             }
                         },
@@ -189,4 +190,5 @@ fun OtpVerifyScreen(navController: NavController){
 
 
     }
+
 }
