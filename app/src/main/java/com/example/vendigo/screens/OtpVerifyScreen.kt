@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -35,14 +34,12 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import com.example.vendigo.R
-import com.example.vendigo.navigation.VendigoScreens
 import com.example.vendigo.ui.theme.fontFamily
 import com.example.vendigo.widgets.VendigoAppBar
 
@@ -150,14 +147,7 @@ fun OtpVerifyScreen(navController: NavController){
                             }
                         },
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = if(index == 5) ImeAction.Done else ImeAction.Next),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-
-                                navController.navigate(VendigoScreens.LocationScreen.name)
-                            }
-                        ),
+                            keyboardType = KeyboardType.Number),
                         singleLine = true,
                         maxLines = 1,
                         modifier = Modifier
