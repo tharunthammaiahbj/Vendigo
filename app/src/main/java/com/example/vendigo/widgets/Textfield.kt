@@ -69,8 +69,11 @@ Column{
             shape = RectangleShape,
             value = phoneNumber,
             onValueChange = {
-                phoneNumber = it
-                if (phoneNumber.length == 10 && phoneNumber.isDigitsOnly()) {
+                if(it.isDigitsOnly()){
+                    phoneNumber = it
+                }
+
+                if (phoneNumber.length == 10) {
                     isButtonEnable = true
                 }
                 else{
