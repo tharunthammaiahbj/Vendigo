@@ -52,7 +52,7 @@ fun PhoneVerifyScreen(navController: NavController){
 
 
                 Spacer(modifier = Modifier.height(30.dp))
-
+// Intro Text
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 30.dp)) {

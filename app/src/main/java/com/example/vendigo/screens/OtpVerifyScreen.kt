@@ -51,18 +51,8 @@ import com.example.vendigo.widgets.VendigoAppBar
 @Composable
 fun OtpVerifyScreen(navController: NavController){
 
-    //by remember means mutable variable(otp)
-    var otp by remember {
-        mutableStateOf(arrayOf("","","","","",""))
-    }
 
-    // = remember means immutable and is to remembered through the code
-    val focusRequesters = remember {
-        Array(6){FocusRequester()}
-    }
-
-
-    var phoneNo = 8971552754
+    val phoneNo = 8971552754
 
     Surface(modifier = Modifier.fillMaxSize()){
         Column(modifier = Modifier
@@ -77,7 +67,7 @@ fun OtpVerifyScreen(navController: NavController){
                 VendigoAppBar()
             }
 
-// Logo with Text
+// Logo with Text ---------------------------
 
             Row(modifier = Modifier
                 .fillMaxWidth()
@@ -124,6 +114,18 @@ fun OtpVerifyScreen(navController: NavController){
             )
             Spacer(modifier = Modifier.height(15.dp))
 
+// OTP input TextField -------------------------------------------------------------------------------
+
+            //by remember means mutable variable(otp)
+            val otp by remember {
+                mutableStateOf(arrayOf("","","","","",""))
+            }
+
+            // = remember means immutable and is to remembered through the code
+            val focusRequesters = remember {
+                Array(6){FocusRequester()}
+            }
+
 
             Row(modifier = Modifier
                 .fillMaxWidth()
@@ -144,18 +146,15 @@ fun OtpVerifyScreen(navController: NavController){
                             if (value.length == 1 && index < 5 && value.isDigitsOnly()){
 
                                 focusRequesters[index+1].requestFocus()
+
                             }
                         },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number,
                             imeAction = if(index == 5) ImeAction.Done else ImeAction.Next),
                         keyboardActions = KeyboardActions(
-                            onNext = {
-                                if(index < 5){
-                                    focusRequesters[index+1].requestFocus()
-                                }
-                            },
                             onDone = {
+                                if(index == 5)
                                 navController.navigate(VendigoScreens.LocationScreen.name)
                             }
                         ),
