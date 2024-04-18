@@ -154,7 +154,7 @@ fun OtpVerifyScreen(navController: NavController){
                             imeAction = if(index == 5) ImeAction.Done else ImeAction.Next),
                         keyboardActions = KeyboardActions(
                             onDone = {
-                                if(index == 5)
+
                                 navController.navigate(VendigoScreens.LocationScreen.name)
                             }
                         ),
