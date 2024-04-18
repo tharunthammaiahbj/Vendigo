@@ -29,6 +29,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -159,7 +162,16 @@ fun OtpVerifyScreen(navController: NavController){
                         maxLines = 1,
                         modifier = Modifier
                             .width(50.dp)
-                            .focusRequester(focusRequesters[index]),
+                            .focusRequester(focusRequesters[index])
+                            .onKeyEvent { event ->
+                                        if(event.key == Key.Backspace){
+                                         if(index > 0){
+                                             focusRequesters[index - 1].requestFocus()
+                                         }
+                                            return@onKeyEvent true
+                                        }
+                                false
+                            },
                         textStyle = TextStyle(
                             color = MaterialTheme.colorScheme.onSurface,
                             fontFamily = fontFamily,
