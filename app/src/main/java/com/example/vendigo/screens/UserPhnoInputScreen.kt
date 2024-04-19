@@ -31,7 +31,7 @@ import com.example.vendigo.widgets.VendigoAppBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun PhoneVerifyScreen(navController: NavController){
+fun UserPhnoInputScreen(navController: NavController){
 
 
 

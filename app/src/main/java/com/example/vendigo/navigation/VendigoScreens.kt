@@ -1,7 +1,7 @@
 package com.example.vendigo.navigation
 
 enum class VendigoScreens() {
-    PhoneVerifyScreen,
+     UserPhnoInputScreen,
     OtpVerifyScreen,
     LocationScreen,
     MainScreen,
