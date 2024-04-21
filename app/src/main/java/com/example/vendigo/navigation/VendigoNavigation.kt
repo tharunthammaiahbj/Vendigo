@@ -13,7 +13,9 @@ fun VendigoNavigation() {
     NavHost(navController = navController,
         startDestination = VendigoScreens.UserPhnoInputScreen.name){
 
-        composable(VendigoScreens.UserPhnoInputScreen.name) {
+        composable(VendigoScreens.UserPhnoInputScreen.name )
+         {
+
             UserPhnoInputScreen(navController = navController)
         }
 
