@@ -3,7 +3,6 @@ package com.example.vendigo.screens
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -57,9 +56,8 @@ fun OtpVerifyScreen(navController: NavController){
             .navigationBarsPadding()
             .fillMaxSize()) {
 
-            Box(modifier = Modifier
-                .padding(start = 230.dp)
-            )
+            Row( horizontalArrangement = Arrangement.End,
+                modifier = Modifier.fillMaxWidth())
             {
                 VendigoAppBar()
             }
