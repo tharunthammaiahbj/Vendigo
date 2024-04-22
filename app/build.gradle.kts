@@ -55,10 +55,10 @@ android {
 }
 
 dependencies {
-    val lifecycle_version = "2.7.0"
+
 
     //dagger hilt
-    implementation("com.google.dagger:hilt-android:2.44")
+    implementation(libs.hilt.android)
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.appcompat)
@@ -69,58 +69,62 @@ dependencies {
     //firebase//
      implementation(libs.firebase.auth)
      // Import the BoM for the Firebase platform
-     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+     implementation(platform(libs.firebase.bom))
+     //noinspection UseTomlInstead
      implementation("com.google.firebase:firebase-auth")
+    //noinspection UseTomlInstead
     implementation("com.google.firebase:firebase-analytics")
 
     //dagger hilt
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    kapt(libs.hilt.android.compiler)
 
     //coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.3.9")
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.play.services)
 
     //coil
-    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation(libs.coil.compose)
 
     //viewmodel lifecycle scope
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
 
     //lifecycle
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
+    implementation(libs.androidx.lifecycle.runtime.ktx.v240)
 
     //retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation(libs.retrofit)
 
     //Json Converter
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.converter.gson)
 
     //OkHttp
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
+    implementation(libs.okhttp)
 
     //Room
-    val room_version = "2.6.1"
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
+//    val room_version = "2.6.1"
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
 
     // To use Kotlin annotation processing tool (kapt)
-    kapt("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
     //Google Fonts
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.1")
+    implementation(libs.androidx.ui.text.google.fonts)
 
     //splash screen
-    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
+    implementation(libs.androidx.core.splashscreen)
 
     //Material3
-    implementation("androidx.compose.material3:material3:1.2.1")
-    implementation("androidx.compose.foundation:foundation:1.6.5")
+    implementation(libs.material3)
+    implementation(libs.androidx.foundation)
     implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
-    implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.0.0-alpha05")
-    implementation("androidx.compose.material:material-icons-extended:1.6.5")
+    implementation(libs.androidx.material3.adaptive.navigation.suite)
+    implementation(libs.androidx.material.icons.extended)
 
     //inbuilt implementations
 
