@@ -1,8 +1,10 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    //downloading kapt
-    kotlin("kapt")
+
+    //downloading ksp
+    id("com.google.devtools.ksp")
+
     //dagger-hilt
     id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
@@ -45,7 +47,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.11"
     }
     packaging {
         resources {
@@ -59,9 +61,8 @@ dependencies {
 
     //dagger hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
-
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -109,7 +110,7 @@ dependencies {
     annotationProcessor(libs.androidx.room.compiler)
 
     // To use Kotlin annotation processing tool (kapt)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
     //Google Fonts
@@ -146,7 +147,3 @@ dependencies {
 
 }
 
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
-}

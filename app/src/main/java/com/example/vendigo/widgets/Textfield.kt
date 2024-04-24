@@ -22,10 +22,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -51,14 +48,6 @@ import com.example.vendigo.ui.theme.fontFamily
 fun TextField(navController: NavController,
               viewModel:PhnoViewModel = hiltViewModel()) {
 
-    var phoneNumber by remember {
-        mutableStateOf("")
-    }
-
-    var isButtonEnable by remember {
-        mutableStateOf(false)
-    }
-
     val focusRequester = remember { FocusRequester() }
 
      val controller = LocalSoftwareKeyboardController.current
@@ -68,17 +57,10 @@ Column{
         .fillMaxWidth()) {
         OutlinedTextField(
             shape = RectangleShape,
-            value = phoneNumber,
+            value =   viewModel.phoneNumber.value,
             onValueChange = {
                 if(it.isDigitsOnly()){
-                    phoneNumber = it
-                }
-
-                if (phoneNumber.length == 10) {
-                    isButtonEnable = true
-                }
-                else{
-                    isButtonEnable = false
+                    viewModel.phoneNumber.value= it
                 }
             },
             modifier = Modifier
@@ -164,7 +146,7 @@ Column{
             },
             modifier = Modifier
                 .width(325.dp),
-            enabled = isButtonEnable
+            enabled = viewModel.isButtonEnabled()
         )
         {
             Text(text = "Continue", fontFamily = fontFamily, fontWeight = FontWeight(800), color = MaterialTheme.colorScheme.onSurface)
