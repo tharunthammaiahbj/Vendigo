@@ -40,13 +40,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.vendigo.navigation.VendigoScreens
+import com.example.vendigo.screens.PhnoViewModel
 import com.example.vendigo.ui.theme.fontFamily
 
 
 @Composable
-fun TextField(navController: NavController) {
+fun TextField(navController: NavController,
+              viewModel:PhnoViewModel = hiltViewModel()) {
 
     var phoneNumber by remember {
         mutableStateOf("")
