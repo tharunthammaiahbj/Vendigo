@@ -1,4 +1,4 @@
-package com.example.vendigo.widgets
+package com.example.vendigo.presentation.widgets
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -40,13 +40,13 @@ import androidx.core.text.isDigitsOnly
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.vendigo.navigation.VendigoScreens
-import com.example.vendigo.screens.PhnoViewModel
-import com.example.vendigo.ui.theme.fontFamily
+import com.example.vendigo.presentation.screens.PhnoViewModel
+import com.example.vendigo.presentation.ui.theme.fontFamily
 
 
 @Composable
 fun TextField(navController: NavController,
-              viewModel:PhnoViewModel = hiltViewModel()) {
+              viewModel: PhnoViewModel = hiltViewModel()) {
 
     val focusRequester = remember { FocusRequester() }
 

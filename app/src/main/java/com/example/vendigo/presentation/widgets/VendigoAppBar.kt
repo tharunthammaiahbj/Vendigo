@@ -1,4 +1,4 @@
-package com.example.vendigo.widgets
+package com.example.vendigo.presentation.widgets
 
 
 
@@ -40,7 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.vendigo.R
-import com.example.vendigo.ui.theme.fontFamily
+import com.example.vendigo.presentation.ui.theme.fontFamily
 
 
 @Composable

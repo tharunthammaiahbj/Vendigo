@@ -1,4 +1,4 @@
-package com.example.vendigo.screens
+package com.example.vendigo.presentation.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -39,8 +39,8 @@ import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import com.example.vendigo.R
-import com.example.vendigo.ui.theme.fontFamily
-import com.example.vendigo.widgets.VendigoAppBar
+import com.example.vendigo.presentation.ui.theme.fontFamily
+import com.example.vendigo.presentation.widgets.VendigoAppBar
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

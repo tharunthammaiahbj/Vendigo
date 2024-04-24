@@ -1,4 +1,4 @@
-package com.example.vendigo.ui.theme
+package com.example.vendigo.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

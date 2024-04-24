@@ -1,4 +1,4 @@
-package com.example.vendigo.ui.theme
+package com.example.vendigo.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

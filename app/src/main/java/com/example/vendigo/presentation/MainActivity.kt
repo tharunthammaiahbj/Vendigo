@@ -1,4 +1,4 @@
-package com.example.vendigo
+package com.example.vendigo.presentation
 
 import android.os.Bundle
 import android.view.Window
@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import com.example.vendigo.navigation.VendigoNavigation
-import com.example.vendigo.ui.theme.VendigoTheme
+import com.example.vendigo.presentation.ui.theme.VendigoTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 

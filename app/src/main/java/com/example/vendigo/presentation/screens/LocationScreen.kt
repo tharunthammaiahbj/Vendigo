@@ -1,4 +1,4 @@
-package com.example.vendigo.screens
+package com.example.vendigo.presentation.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding

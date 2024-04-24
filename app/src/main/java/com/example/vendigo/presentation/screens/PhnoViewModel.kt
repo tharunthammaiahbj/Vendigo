@@ -1,4 +1,4 @@
-package com.example.vendigo.screens
+package com.example.vendigo.presentation.screens
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
