@@ -40,7 +40,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import com.example.vendigo.R
 import com.example.vendigo.presentation.ui.theme.fontFamily
-import com.example.vendigo.presentation.widgets.VendigoAppBar
+import com.example.vendigo.presentation.components.VendigoAppBar
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

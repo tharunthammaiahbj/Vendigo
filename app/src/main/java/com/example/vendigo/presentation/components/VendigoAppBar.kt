@@ -1,4 +1,4 @@
-package com.example.vendigo.presentation.widgets
+package com.example.vendigo.presentation.components
 
 
 

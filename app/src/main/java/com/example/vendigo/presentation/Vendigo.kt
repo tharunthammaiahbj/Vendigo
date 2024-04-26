@@ -1,4 +1,4 @@
-package com.example.vendigo
+package com.example.vendigo.presentation
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

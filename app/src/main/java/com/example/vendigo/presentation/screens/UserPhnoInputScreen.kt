@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.vendigo.R
 import com.example.vendigo.presentation.ui.theme.fontFamily
-import com.example.vendigo.presentation.widgets.TextField
-import com.example.vendigo.presentation.widgets.VendigoAppBar
+import com.example.vendigo.presentation.components.TextField
+import com.example.vendigo.presentation.components.VendigoAppBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
