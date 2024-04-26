@@ -3,21 +3,24 @@ package com.example.vendigo.presentation.screens
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.vendigo.domain.use_case.IsButtonEnableUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 
-class PhnoViewModel @Inject constructor() : ViewModel() {
+class PhnoViewModel @Inject constructor(
+
+    private var isButtonEnable: IsButtonEnableUseCase
+) : ViewModel() {
 
     // mutable state to hold the phone number
     val phoneNumber: MutableState<String> = mutableStateOf("")
 
 
     //function enable/disable button upon condition
-    fun isButtonEnabled():Boolean{
-        return phoneNumber.value?.length == 10
+    fun buttonEnable():Boolean {
+        return IsButtonEnableUseCase().isButtonEnable(phoneNumber)
     }
-
 
 }

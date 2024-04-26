@@ -146,7 +146,7 @@ Column{
             },
             modifier = Modifier
                 .width(325.dp),
-            enabled = viewModel.isButtonEnabled()
+            enabled = viewModel.buttonEnable()
         )
         {
             Text(text = "Continue", fontFamily = fontFamily, fontWeight = FontWeight(800), color = MaterialTheme.colorScheme.onSurface)
