@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class PhnoViewModel @Inject constructor(
 
-    private var isButtonEnable: IsButtonEnableUseCase
+    private val isButtonEnable: IsButtonEnableUseCase
 ) : ViewModel() {
 
     // mutable state to hold the phone number
