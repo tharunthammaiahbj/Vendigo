@@ -25,16 +25,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.vendigo.R
-import com.example.vendigo.presentation.ui.theme.fontFamily
+import com.example.vendigo.presentation.components.Button
 import com.example.vendigo.presentation.components.TextField
 import com.example.vendigo.presentation.components.VendigoAppBar
+import com.example.vendigo.presentation.ui.theme.fontFamily
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun UserPhnoInputScreen(navController: NavController){
+fun UserPhnoInputScreen(navController: NavController)
 
-
-
+{
 
         Surface(modifier = Modifier
             .fillMaxSize()
@@ -110,14 +110,20 @@ fun UserPhnoInputScreen(navController: NavController){
                     TextField(navController = navController)
 
                 }
-                Spacer(modifier = Modifier.height(60.dp))
+
+                Spacer(modifier = Modifier.height(30.dp))
+
+                Row(modifier = Modifier
+                    .padding(start = 30.dp)
+                    .fillMaxWidth())
+                {
+                    Button(navController = navController)
+                }
+
 
 
             }
         }
-
-
-
 
 
 

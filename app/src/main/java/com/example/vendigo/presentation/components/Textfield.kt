@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,10 +12,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.PhoneAndroid
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -28,8 +24,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -39,7 +33,6 @@ import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.vendigo.navigation.VendigoScreens
 import com.example.vendigo.presentation.screens.PhnoViewModel
 import com.example.vendigo.presentation.ui.theme.fontFamily
 
@@ -49,8 +42,6 @@ fun TextField(navController: NavController,
               viewModel: PhnoViewModel = hiltViewModel()) {
 
     val focusRequester = remember { FocusRequester() }
-
-     val controller = LocalSoftwareKeyboardController.current
 
 Column{
     Box(modifier = Modifier
@@ -126,34 +117,6 @@ Column{
 
         )
     }
-
-    Spacer(modifier = Modifier.height(30.dp))
-
-    val context = LocalContext.current
-    Box(modifier = Modifier
-        .fillMaxWidth()){
-        Button(colors = ButtonDefaults.buttonColors(if (isSystemInDarkTheme()) Color(0xFF3C732E) else Color(
-            0xFF61CD46
-        )
-        ),
-            onClick =
-            {
-
-                    navController.navigate(VendigoScreens.OtpVerifyScreen.name)
-                    controller?.hide()
-//                Toast.makeText(context, "Next Page Baby !!", Toast.LENGTH_SHORT).show()
-
-            },
-            modifier = Modifier
-                .width(325.dp),
-            enabled = viewModel.buttonEnable()
-        )
-        {
-            Text(text = "Continue", fontFamily = fontFamily, fontWeight = FontWeight(800), color = MaterialTheme.colorScheme.onSurface)
-
-        }
-    }
-
 
 
 }
