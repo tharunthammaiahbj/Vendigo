@@ -14,8 +14,10 @@ class PhnoViewModel @Inject constructor(
     private val isButtonEnable: IsButtonEnableUseCase
 ) : ViewModel() {
 
-    // mutable state to hold the phone number
+    //mutable phone number
     val phoneNumber: MutableState<String> = mutableStateOf("")
+    //final phoneNumber after continue button
+    val finalPhoneNumber: MutableState<String> = mutableStateOf("")
 
 
     //function enable/disable button upon condition

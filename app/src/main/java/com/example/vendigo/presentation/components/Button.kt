@@ -21,7 +21,8 @@ import com.example.vendigo.presentation.ui.theme.fontFamily
 
 @Composable
 fun Button(navController: NavController,
-           viewModel:PhnoViewModel = hiltViewModel()){
+           viewModel:PhnoViewModel = hiltViewModel()
+            ){
 
     val controller = LocalSoftwareKeyboardController.current
 
@@ -36,6 +37,7 @@ fun Button(navController: NavController,
 
                 navController.navigate(VendigoScreens.OtpVerifyScreen.name)
                 controller?.hide()
+                viewModel.finalPhoneNumber.value = viewModel.phoneNumber.value
 
             },
             modifier = Modifier
