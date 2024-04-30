@@ -1,6 +1,7 @@
 package com.example.vendigo.presentation.screens
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,16 +24,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.vendigo.R
 import com.example.vendigo.presentation.components.Button
 import com.example.vendigo.presentation.components.TextField
 import com.example.vendigo.presentation.components.VendigoAppBar
 import com.example.vendigo.presentation.ui.theme.fontFamily
+import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun UserPhnoInputScreen(navController: NavController)
+fun UserPhnoInputScreen(
+    navController: NavController,
+    viewModel: PhoneAuthViewModel = hiltViewModel(),
+    activity: Activity
+)
 
 {
 

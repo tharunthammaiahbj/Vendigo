@@ -1,8 +1,11 @@
 package com.example.vendigo.common
 
-sealed class Resource<T>(val data:T? = null, val message: String? = null) {
+sealed class ResultState<out T>{
 
-    class Success<T>(data: T) : Resource<T>(data)
-    class Error<T>(message: String,data: T? = null) : Resource<T>(data,message)
-    class Loading<T>(data: T? = null) : Resource<T>(data)
+    data class Success<out R>(val data:R):ResultState<R>()
+
+    data class Failure(val msg:Throwable):ResultState<Nothing>()
+
+    object Loading: ResultState<Nothing>()
+
 }

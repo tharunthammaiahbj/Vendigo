@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.vendigo.presentation.screens.PhnoViewModel
 import com.example.vendigo.presentation.ui.theme.fontFamily
+import com.example.vendigo.presentation.viewmodel.PhnoViewModel
 
 
 @Composable

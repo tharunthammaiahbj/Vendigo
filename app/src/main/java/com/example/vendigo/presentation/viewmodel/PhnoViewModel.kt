@@ -1,4 +1,4 @@
-package com.example.vendigo.presentation.screens
+package com.example.vendigo.presentation.viewmodel
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -16,8 +16,6 @@ class PhnoViewModel @Inject constructor(
 
     //mutable phone number
     val phoneNumber: MutableState<String> = mutableStateOf("")
-    //final phoneNumber after continue button
-    val finalPhoneNumber: MutableState<String> = mutableStateOf("")
 
 
     //function enable/disable button upon condition
