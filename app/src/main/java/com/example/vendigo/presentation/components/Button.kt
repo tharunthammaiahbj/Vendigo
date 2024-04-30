@@ -10,21 +10,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import com.example.vendigo.navigation.VendigoScreens
-import com.example.vendigo.presentation.viewmodel.PhnoViewModel
 import com.example.vendigo.presentation.ui.theme.fontFamily
 
 @Composable
-fun Button(navController: NavController,
-           viewModel: PhnoViewModel = hiltViewModel()
+fun Button(
+           label:String,
+           onClick: () ->Unit,
+           enable:Boolean
             ){
 
-    val controller = LocalSoftwareKeyboardController.current
+
 
     Box(modifier = Modifier
         .fillMaxWidth()){
@@ -32,20 +29,13 @@ fun Button(navController: NavController,
             0xFF61CD46
         )
         ),
-            onClick =
-            {
-
-                navController.navigate(VendigoScreens.OtpVerifyScreen.name)
-                controller?.hide()
-
-
-            },
+            onClick = onClick,
             modifier = Modifier
                 .width(325.dp),
-            enabled = viewModel.buttonEnable()
+            enabled = enable
         )
         {
-            Text(text = "Continue", fontFamily = fontFamily, fontWeight = FontWeight(800), color = MaterialTheme.colorScheme.onSurface)
+            Text(text = "$label", fontFamily = fontFamily, fontWeight = FontWeight(800), color = MaterialTheme.colorScheme.onSurface)
 
         }
     }

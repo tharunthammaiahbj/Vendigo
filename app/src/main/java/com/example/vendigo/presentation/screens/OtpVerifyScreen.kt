@@ -1,6 +1,7 @@
 package com.example.vendigo.presentation.screens
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -30,6 +32,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -37,18 +40,49 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.vendigo.R
-import com.example.vendigo.presentation.ui.theme.fontFamily
+import com.example.vendigo.common.commonDialog
 import com.example.vendigo.presentation.components.VendigoAppBar
+import com.example.vendigo.presentation.ui.theme.fontFamily
+import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
 
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "CoroutineCreationDuringComposition")
 @Composable
-fun OtpVerifyScreen(navController: NavController){
+fun OtpVerifyScreen(
+    navController: NavController,
+    viewModel: PhoneAuthViewModel = hiltViewModel(),
+    activity: Activity
+){
+    //by remember means mutable variable(otp)
+    val otp by remember {
+        mutableStateOf(arrayOf("","","","","",""))
+    }
+
+    // = remember means immutable and is to remembered through the code
+    val focusRequesters = remember {
+        Array(6){FocusRequester()}
+    }
+
+    var otpValue = remember {
+        mutableStateOf("")
+    }
 
 
-    val phoneNo = 8971552754
+    val phoneNo = "+91${viewModel.finalPhoneNumber}"
+
+    val scope = rememberCoroutineScope()
+    var isDialog by remember {
+        mutableStateOf(false)
+    }
+
+    if(isDialog){
+        commonDialog()
+    }
+
+    val context = LocalContext.current
 
     Surface(modifier = Modifier.fillMaxSize()){
         Column(modifier = Modifier
@@ -111,15 +145,6 @@ fun OtpVerifyScreen(navController: NavController){
 
 // OTP input TextField -------------------------------------------------------------------------------
 
-            //by remember means mutable variable(otp)
-            val otp by remember {
-                mutableStateOf(arrayOf("","","","","",""))
-            }
-
-            // = remember means immutable and is to remembered through the code
-            val focusRequesters = remember {
-                Array(6){FocusRequester()}
-            }
 
 
             Row(modifier = Modifier
@@ -134,7 +159,7 @@ fun OtpVerifyScreen(navController: NavController){
                         value = otpDigit,
                         onValueChange = {
                             value ->
-//                            otp[index] = value.takeLast(1)
+
                             if(value.length <= 1 && value.isDigitsOnly()){
                                 otpDigit = value
                             }
@@ -142,7 +167,9 @@ fun OtpVerifyScreen(navController: NavController){
 
                                 focusRequesters[index+1].requestFocus()
 
+
                             }
+
                         },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number),
@@ -152,12 +179,12 @@ fun OtpVerifyScreen(navController: NavController){
                             .width(50.dp)
                             .focusRequester(focusRequesters[index])
                             .onKeyEvent { event ->
-                                        if(event.key == Key.Backspace){
-                                         if(index > 0){
-                                             focusRequesters[index - 1].requestFocus()
-                                         }
-                                            return@onKeyEvent true
-                                        }
+                                if (event.key == Key.Backspace) {
+                                    if (index > 0) {
+                                        focusRequesters[index - 1].requestFocus()
+                                    }
+                                    return@onKeyEvent true
+                                }
                                 false
                             },
                         textStyle = TextStyle(
@@ -171,11 +198,10 @@ fun OtpVerifyScreen(navController: NavController){
 
             }
 
-
-
         }
 
 
     }
+
 
 }

@@ -2,6 +2,7 @@ package com.example.vendigo.presentation.screens
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +20,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,11 +35,16 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.vendigo.R
+import com.example.vendigo.common.ResultState
+import com.example.vendigo.common.commonDialog
+import com.example.vendigo.navigation.VendigoScreens
 import com.example.vendigo.presentation.components.Button
 import com.example.vendigo.presentation.components.TextField
 import com.example.vendigo.presentation.components.VendigoAppBar
 import com.example.vendigo.presentation.ui.theme.fontFamily
 import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -42,6 +55,24 @@ fun UserPhnoInputScreen(
 )
 
 {
+
+    var phoneNumber = remember {
+        mutableStateOf("")
+    }
+
+    val controller = LocalSoftwareKeyboardController.current
+
+    val scope = rememberCoroutineScope()
+    var isDialog by remember {
+        mutableStateOf(false)
+    }
+
+    if(isDialog){
+        commonDialog()
+    }
+
+    val context = LocalContext.current
+
 
         Surface(modifier = Modifier
             .fillMaxSize()
@@ -114,7 +145,7 @@ fun UserPhnoInputScreen(
 
                 Row (modifier = Modifier.padding(start = 30.dp)){
 
-                    TextField(navController = navController)
+                    TextField(phoneNumber = phoneNumber)
 
                 }
 
@@ -124,7 +155,38 @@ fun UserPhnoInputScreen(
                     .padding(start = 30.dp)
                     .fillMaxWidth())
                 {
-                    Button(navController = navController)
+                   Button(
+                       label = "Continue",
+                       onClick = {
+                                 navController.navigate(VendigoScreens.OtpVerifyScreen.name)
+                                controller?.hide()
+                                viewModel.finalPhoneNumber.value = phoneNumber.value
+
+                                scope.launch(Dispatchers.Main){
+                                    viewModel.createUserWithPhone(
+                                        phoneNumber.value,
+                                        activity
+                                    ).collect{
+                                        when(it){
+                                            is ResultState.Failure -> {
+                                                 isDialog = false
+                                                Toast.makeText(context,"${it.msg.toString()}",Toast.LENGTH_SHORT).show()
+
+                                            }
+                                            ResultState.Loading -> {
+                                                isDialog = true
+                                            }
+                                            is ResultState.Success -> {
+                                                Toast.makeText(context,"${it.data}", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                 },
+                       enable =viewModel.buttonEnable(phoneNumber = phoneNumber)
+                   )
                 }
 
 

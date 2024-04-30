@@ -1,5 +1,6 @@
 package com.example.vendigo.navigation
 
+import android.app.Activity
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,7 +17,7 @@ fun VendigoNavigation() {
         composable(VendigoScreens.UserPhnoInputScreen.name )
          {
 
-            UserPhnoInputScreen(navController = navController)
+            UserPhnoInputScreen(navController = navController, activity = Activity())
         }
 
         composable(VendigoScreens.OtpVerifyScreen.name) {
