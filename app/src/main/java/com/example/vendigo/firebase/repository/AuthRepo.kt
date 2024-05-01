@@ -4,15 +4,18 @@ import android.app.Activity
 import com.example.vendigo.common.ResultState
 import kotlinx.coroutines.flow.Flow
 
-interface AuthRepo {
+
+interface AuthRepo{
 
 
-    fun createUserWithPhone(
+
+     suspend fun createUserWithPhone(
         phoneNumber:String,
         activity:Activity
     ): Flow<ResultState<String>>
 
-    fun signWithCredential(
+
+      suspend fun signWithCredential(
         otp:String
     ): Flow<ResultState<String>>
 

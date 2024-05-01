@@ -16,14 +16,18 @@ class PhoneAuthViewModel @Inject constructor(
 
 ):ViewModel() {
 
-    fun createUserWithPhone(
+
+    suspend fun createUserWithPhone(
         phoneNumber:String,
         activity:Activity
     ) = repo.createUserWithPhone(phoneNumber, activity)
 
-    fun signInWithCredential(
+
+    suspend fun signInWithCredential(
         code:String
     ) = repo.signWithCredential(code)
+
+
 
     fun buttonEnable(phoneNumber:MutableState<String>):Boolean {
 

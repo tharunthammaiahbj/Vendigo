@@ -20,7 +20,9 @@ class AuthRepositoryImpl @Inject constructor(
 
     private lateinit var onVerificationCode : String
 
-    override fun createUserWithPhone(phoneNumber: String,activity: Activity): Flow<ResultState<String>> = callbackFlow {
+
+
+    override suspend fun createUserWithPhone(phoneNumber: String, activity: Activity): Flow<ResultState<String>> = callbackFlow {
 
 
         val onVerificationCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
@@ -45,7 +47,7 @@ class AuthRepositoryImpl @Inject constructor(
 
         }
 
-        val options = PhoneAuthOptions.newBuilder(auth)
+            val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber("+91$phoneNumber")
             .setTimeout(60L,TimeUnit.SECONDS)
             .setActivity(activity)
@@ -58,7 +60,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     }
 
-    override fun signWithCredential(otp: String): Flow<ResultState<String>> = callbackFlow {
+      override suspend  fun signWithCredential(otp: String): Flow<ResultState<String>> = callbackFlow {
 
         trySend(ResultState.Loading)
         val credential = PhoneAuthProvider.getCredential(onVerificationCode,otp)

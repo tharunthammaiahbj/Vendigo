@@ -1,6 +1,5 @@
 package com.example.vendigo.presentation.screens
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -46,7 +45,7 @@ import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+
 @Composable
 fun UserPhnoInputScreen(
     navController: NavController,
@@ -71,7 +70,7 @@ fun UserPhnoInputScreen(
         commonDialog()
     }
 
-    val context = LocalContext.current
+        val context = LocalContext.current
 
 
         Surface(modifier = Modifier
@@ -160,11 +159,11 @@ fun UserPhnoInputScreen(
                        onClick = {
                                  navController.navigate(VendigoScreens.OtpVerifyScreen.name)
                                 controller?.hide()
-                                viewModel.finalPhoneNumber.value = phoneNumber.value
+                                viewModel.finalPhoneNumber.value = "+91${phoneNumber.value}"
 
                                 scope.launch(Dispatchers.Main){
                                     viewModel.createUserWithPhone(
-                                        phoneNumber.value,
+                                         viewModel.finalPhoneNumber.value,
                                         activity
                                     ).collect{
                                         when(it){
