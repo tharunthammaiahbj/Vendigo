@@ -2,7 +2,6 @@ package com.example.vendigo.presentation.viewmodel
 
 import android.app.Activity
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.vendigo.domain.use_case.IsButtonEnableUseCase
 import com.example.vendigo.firebase.repository.AuthRepo
@@ -34,6 +33,5 @@ class PhoneAuthViewModel @Inject constructor(
         return IsButtonEnableUseCase().isButtonEnable(phoneNumber)
     }
 
-    val finalPhoneNumber: MutableState<String> = mutableStateOf("")
 
 }

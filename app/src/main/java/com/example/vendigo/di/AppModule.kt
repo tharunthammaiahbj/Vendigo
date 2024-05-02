@@ -20,5 +20,7 @@ object AppModule {
         fun provideAuthRepo():AuthRepo {
             return AuthRepositoryImpl(auth = FirebaseAuth.getInstance())
         }
+    
+
 
 }

@@ -53,7 +53,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "CoroutineCreationDuringComposition")
+
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun OtpVerifyScreen(
     navController: NavController,
@@ -138,7 +139,7 @@ fun OtpVerifyScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "Enter the OTP sent to  ${viewModel.finalPhoneNumber.value}",
+                text = "Enter the OTP sent to  +91",
                 fontFamily = fontFamily,
                 fontWeight = FontWeight.Thin,
                 fontSize = 14.sp,

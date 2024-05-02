@@ -157,14 +157,15 @@ fun UserPhnoInputScreen(
                    Button(
                        label = "Continue",
                        onClick = {
-                                 navController.navigate(VendigoScreens.OtpVerifyScreen.name)
+
+                                  navController.navigate(VendigoScreens.OtpVerifyScreen.name)
                                 controller?.hide()
-                                viewModel.finalPhoneNumber.value = "+91${phoneNumber.value}"
+
 
                                 scope.launch(Dispatchers.Main){
                                     viewModel.createUserWithPhone(
-                                         viewModel.finalPhoneNumber.value,
-                                        activity
+                                         "+91${phoneNumber.value}" ,
+                                       activity
                                     ).collect{
                                         when(it){
                                             is ResultState.Failure -> {
@@ -187,6 +188,8 @@ fun UserPhnoInputScreen(
                        enable =viewModel.buttonEnable(phoneNumber = phoneNumber)
                    )
                 }
+                
+                Text(text = "+91${phoneNumber.value}")
 
 
 

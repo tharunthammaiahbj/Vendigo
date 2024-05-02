@@ -32,12 +32,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.vendigo.presentation.ui.theme.fontFamily
+import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
 
 
 @Composable
 fun TextField(
-    phoneNumber: MutableState<String>
+    phoneNumber: MutableState<String>,
+    viewModel: PhoneAuthViewModel = hiltViewModel()
 ) {
 
     val focusRequester = remember { FocusRequester() }
