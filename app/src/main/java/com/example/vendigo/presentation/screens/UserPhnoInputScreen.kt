@@ -1,7 +1,6 @@
 package com.example.vendigo.presentation.screens
 
 import android.app.Activity
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -34,7 +33,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.vendigo.R
-import com.example.vendigo.common.ResultState
 import com.example.vendigo.common.commonDialog
 import com.example.vendigo.navigation.VendigoScreens
 import com.example.vendigo.presentation.components.Button
@@ -42,8 +40,6 @@ import com.example.vendigo.presentation.components.TextField
 import com.example.vendigo.presentation.components.VendigoAppBar
 import com.example.vendigo.presentation.ui.theme.fontFamily
 import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 @Composable
@@ -161,35 +157,12 @@ fun UserPhnoInputScreen(
                                   navController.navigate(VendigoScreens.OtpVerifyScreen.name)
                                 controller?.hide()
 
-
-                                scope.launch(Dispatchers.Main){
-                                    viewModel.createUserWithPhone(
-                                         "+91${phoneNumber.value}" ,
-                                       activity
-                                    ).collect{
-                                        when(it){
-                                            is ResultState.Failure -> {
-                                                 isDialog = false
-                                                Toast.makeText(context,"${it.msg.toString()}",Toast.LENGTH_SHORT).show()
-
-                                            }
-                                            ResultState.Loading -> {
-                                                isDialog = true
-                                            }
-                                            is ResultState.Success -> {
-                                                Toast.makeText(context,"${it.data}", Toast.LENGTH_SHORT).show()
-                                            }
-                                        }
-                                    }
-                                }
-
-
                                  },
                        enable =viewModel.buttonEnable(phoneNumber = phoneNumber)
                    )
                 }
                 
-                Text(text = "+91${phoneNumber.value}")
+
 
 
 

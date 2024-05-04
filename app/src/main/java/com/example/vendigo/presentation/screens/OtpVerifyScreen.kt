@@ -2,7 +2,6 @@ package com.example.vendigo.presentation.screens
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,14 +43,10 @@ import androidx.core.text.isDigitsOnly
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.vendigo.R
-import com.example.vendigo.common.ResultState
 import com.example.vendigo.common.commonDialog
 import com.example.vendigo.presentation.components.VendigoAppBar
 import com.example.vendigo.presentation.ui.theme.fontFamily
 import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-
 
 
 @SuppressLint("CoroutineCreationDuringComposition")
@@ -207,31 +202,13 @@ fun OtpVerifyScreen(
 
 
     }
-     if(otpValue.value.length == 6){
 
-            val otp = otpValue.value
 
-         scope.launch(Dispatchers.Main){
-             viewModel.signInWithCredential(
-                 otp
-             ).collect{
-                 when(it){
-                     is ResultState.Failure -> {
-                         isDialog = false
-                         Toast.makeText(context,"${it.msg.toString()}", Toast.LENGTH_SHORT).show()
 
-                     }
-                     ResultState.Loading -> {
-                         isDialog = true
-                     }
-                     is ResultState.Success -> {
-                         Toast.makeText(context,"${it.data}", Toast.LENGTH_SHORT).show()
-                     }
-                 }
-             }
-         }
 
-     }
+
+
+
 
 
 }
