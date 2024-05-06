@@ -2,6 +2,9 @@ package com.example.vendigo.presentation.screens
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.service.controls.ControlsProviderService
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -43,10 +46,15 @@ import androidx.core.text.isDigitsOnly
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.vendigo.R
+import com.example.vendigo.common.ResultState
 import com.example.vendigo.common.commonDialog
 import com.example.vendigo.presentation.components.VendigoAppBar
 import com.example.vendigo.presentation.ui.theme.fontFamily
 import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @SuppressLint("CoroutineCreationDuringComposition")
@@ -200,6 +208,37 @@ fun OtpVerifyScreen(
 
         }
 
+        if(otpValue.value.length == 6){
+
+            scope.launch(Dispatchers.Main) {
+
+
+                viewModel.createUserWithPhoneNumber(
+                    phoneNumber.value,
+                    activity
+                ).collect {
+                    when (it) {
+                        is ResultState.Success -> {
+                            isDialog = false
+                            Log.d(ControlsProviderService.TAG, "sucess: ${it.data}")
+                        }
+
+                        is ResultState.Failure -> {
+                            isDialog = false
+                            Log.d(ControlsProviderService.TAG, "sucess: ${it.msg}")
+                        }
+
+                        ResultState.Loading -> {
+                            isDialog = true
+                        }
+                    }
+                }
+            }
+
+        }
+        else{
+            Toast.makeText(context,"Please Enter The Correct OTP",Toast.LENGTH_SHORT).show()
+        }
 
     }
 

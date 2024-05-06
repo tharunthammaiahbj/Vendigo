@@ -1,6 +1,8 @@
 package com.example.vendigo.presentation.screens
 
 import android.app.Activity
+import android.service.controls.ControlsProviderService.TAG
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,13 +35,15 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.vendigo.R
+import com.example.vendigo.common.ResultState
 import com.example.vendigo.common.commonDialog
-import com.example.vendigo.navigation.VendigoScreens
 import com.example.vendigo.presentation.components.Button
 import com.example.vendigo.presentation.components.TextField
 import com.example.vendigo.presentation.components.VendigoAppBar
 import com.example.vendigo.presentation.ui.theme.fontFamily
 import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -153,9 +157,30 @@ fun UserPhnoInputScreen(
                    Button(
                        label = "Continue",
                        onClick = {
+                                    controller?.hide()
+                           scope.launch(Dispatchers.Main) {
+                               viewModel.createUserWithPhoneNumber(
+                                   phoneNumber.value,
+                                   activity
+                               ).collect {
+                                   when (it) {
+                                       is ResultState.Success -> {
+                                           isDialog = false
+                                           Log.d(TAG, "sucess: ${it.data}")
+                                       }
 
-                                  navController.navigate(VendigoScreens.OtpVerifyScreen.name)
-                                controller?.hide()
+                                       is ResultState.Failure -> {
+                                           isDialog = false
+                                           Log.d(TAG, "sucess: ${it.msg}")
+                                       }
+
+                                       ResultState.Loading -> {
+                                           isDialog = true
+                                       }
+                                   }
+                               }
+                           }
+
 
                                  },
                        enable =viewModel.buttonEnable(phoneNumber = phoneNumber)
