@@ -37,6 +37,7 @@ import androidx.navigation.NavController
 import com.example.vendigo.R
 import com.example.vendigo.common.ResultState
 import com.example.vendigo.common.commonDialog
+import com.example.vendigo.navigation.VendigoScreens
 import com.example.vendigo.presentation.components.Button
 import com.example.vendigo.presentation.components.TextField
 import com.example.vendigo.presentation.components.VendigoAppBar
@@ -158,24 +159,25 @@ fun UserPhnoInputScreen(
                        label = "Continue",
                        onClick = {
                                     controller?.hide()
+                                    navController.navigate(VendigoScreens.OtpVerifyScreen.name)
                            scope.launch(Dispatchers.Main) {
                                viewModel.createUserWithPhoneNumber(
-                                   phoneNumber.value,
+                                   "+91${phoneNumber.value}",
                                    activity
                                ).collect {
                                    when (it) {
                                        is ResultState.Success -> {
                                            isDialog = false
-                                           Log.d(TAG, "sucess: ${it.data}")
+                                           Log.d(TAG, "success: ${it.data}")
                                        }
 
                                        is ResultState.Failure -> {
                                            isDialog = false
-                                           Log.d(TAG, "sucess: ${it.msg}")
+                                           Log.d(TAG, "success: ${it.msg}")
                                        }
 
                                        ResultState.Loading -> {
-                                           isDialog = true
+                                           isDialog = false
                                        }
                                    }
                                }

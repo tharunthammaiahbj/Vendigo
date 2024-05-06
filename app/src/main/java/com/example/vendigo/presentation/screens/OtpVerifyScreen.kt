@@ -51,8 +51,6 @@ import com.example.vendigo.common.commonDialog
 import com.example.vendigo.presentation.components.VendigoAppBar
 import com.example.vendigo.presentation.ui.theme.fontFamily
 import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -74,7 +72,7 @@ fun OtpVerifyScreen(
         Array(6){FocusRequester()}
     }
 
-    var otpValue = remember {
+    var typedOTP = remember {
         mutableStateOf("")
     }
 
@@ -177,7 +175,7 @@ fun OtpVerifyScreen(
 
 
                             }
-                            otpValue.value = otp.joinToString("")
+                            typedOTP.value = otp.joinToString("")
                         },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number),
@@ -208,14 +206,16 @@ fun OtpVerifyScreen(
 
         }
 
-        if(otpValue.value.length == 6){
+        if(typedOTP.value.length == 6){
+
+            val finalOTP = typedOTP.value
 
             scope.launch(Dispatchers.Main) {
 
+            val credential =viewModel.verifyPhoneNumberWithCode(finalOTP)
 
-                viewModel.createUserWithPhoneNumber(
-                    phoneNumber.value,
-                    activity
+                viewModel.signInWithPhoneAuthCredential(
+                        credential
                 ).collect {
                     when (it) {
                         is ResultState.Success -> {

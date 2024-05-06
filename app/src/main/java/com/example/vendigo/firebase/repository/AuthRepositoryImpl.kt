@@ -3,7 +3,9 @@ package com.example.vendigo.firebase.repository
 import android.app.Activity
 import android.service.controls.ControlsProviderService.TAG
 import android.util.Log
+import android.widget.Toast
 import com.example.vendigo.common.ResultState
+import com.example.vendigo.presentation.MainActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
@@ -11,15 +13,17 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-        private val auth:FirebaseAuth,
-
+        private val auth:FirebaseAuth
 ):AuthRepo {
 
 
@@ -28,7 +32,7 @@ class AuthRepositoryImpl @Inject constructor(
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
 
-    override fun createUserWithPhoneNumber(
+    override suspend fun createUserWithPhoneNumber(
         phoneNumber: String,
         activity: Activity
     ): Flow<ResultState<String>> = callbackFlow {
@@ -45,7 +49,10 @@ class AuthRepositoryImpl @Inject constructor(
 
 
                 Log.d(TAG, "onVerificationCompleted:$credential")
-                signInWithPhoneAuthCredential(credential)
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    signInWithPhoneAuthCredential(credential)
+                }
 
             }
 
@@ -97,7 +104,7 @@ class AuthRepositoryImpl @Inject constructor(
 
 
     // [START signInWithPhoneCred]
-    override fun signInWithPhoneAuthCredential(
+    override suspend fun signInWithPhoneAuthCredential(
         credential: PhoneAuthCredential
 
     ): Flow<ResultState<String>> = callbackFlow {
@@ -110,11 +117,11 @@ class AuthRepositoryImpl @Inject constructor(
                     Log.d(TAG, "signInWithCredential:success")
                     trySend(ResultState.Success("otp verified"))
 
-                    val user = task.result?.user
                 }
 
                 else {
                     // Sign in failed, display a message and update the UI
+                    Toast.makeText( MainActivity(),"Sign in Failed",Toast.LENGTH_SHORT).show()
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
 
 
@@ -134,7 +141,7 @@ class AuthRepositoryImpl @Inject constructor(
 
 
     // [START resendVerificationCode]
-    override fun resendVerificationCode(
+    override suspend fun resendVerificationCode(
         phoneNumber: String,
         token: PhoneAuthProvider.ForceResendingToken,
         activity: Activity
@@ -153,9 +160,14 @@ class AuthRepositoryImpl @Inject constructor(
 
     }
 
+
      // [END resendVerificationCode]
 
 
+        override suspend fun verifyPhoneNumberWithCode(code: String): PhoneAuthCredential {
+            val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, code)
+            return  credential
+        }
 
 
 }

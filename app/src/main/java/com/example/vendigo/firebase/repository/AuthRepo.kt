@@ -9,20 +9,23 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthRepo{
 
-    fun createUserWithPhoneNumber(
+    suspend fun createUserWithPhoneNumber(
         phoneNumber:String,
         activity: Activity
     ): Flow<ResultState<String>>
 
-    fun signInWithPhoneAuthCredential(
+    suspend fun signInWithPhoneAuthCredential(
         credential: PhoneAuthCredential
     ): Flow<ResultState<String>>
 
-    fun resendVerificationCode(
+    suspend fun resendVerificationCode(
         phoneNumber:String,
         token: PhoneAuthProvider.ForceResendingToken,
         activity: Activity
     ): Flow<ResultState<String>>
 
+    suspend fun verifyPhoneNumberWithCode(
+        code: String
+    ): PhoneAuthCredential
 
 }

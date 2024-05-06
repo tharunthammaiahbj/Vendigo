@@ -22,23 +22,25 @@ class PhoneAuthViewModel @Inject constructor(
         return IsButtonEnableUseCase().isButtonEnable(phoneNumber)
     }
 
-    fun createUserWithPhoneNumber(
+     suspend fun createUserWithPhoneNumber(
         phoneNumber:String,
         activity:Activity
     ) = repo.createUserWithPhoneNumber(phoneNumber, activity)
 
 
-    fun signInWithPhoneAuthCredential(
+    suspend fun signInWithPhoneAuthCredential(
         credential: PhoneAuthCredential
     ) = repo.signInWithPhoneAuthCredential(credential)
 
 
-    fun resendVerificationCode(
+    suspend fun resendVerificationCode(
         phoneNumber:String,
         token: PhoneAuthProvider.ForceResendingToken,
         activity: Activity
     )= repo.resendVerificationCode(phoneNumber, token, activity)
 
 
-
+    suspend fun verifyPhoneNumberWithCode(
+        code: String
+    ) = repo.verifyPhoneNumberWithCode(code)
 }
