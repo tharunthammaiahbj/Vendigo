@@ -2,8 +2,6 @@ package com.example.vendigo.presentation.screens
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.service.controls.ControlsProviderService
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -48,6 +46,7 @@ import androidx.navigation.NavController
 import com.example.vendigo.R
 import com.example.vendigo.common.ResultState
 import com.example.vendigo.common.commonDialog
+import com.example.vendigo.navigation.VendigoScreens
 import com.example.vendigo.presentation.components.VendigoAppBar
 import com.example.vendigo.presentation.ui.theme.fontFamily
 import com.example.vendigo.presentation.viewmodel.PhoneAuthViewModel
@@ -176,6 +175,7 @@ fun OtpVerifyScreen(
 
                             }
                             typedOTP.value = otp.joinToString("")
+
                         },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number),
@@ -206,13 +206,13 @@ fun OtpVerifyScreen(
 
         }
 
+
         if(typedOTP.value.length == 6){
 
             val finalOTP = typedOTP.value
 
             scope.launch(Dispatchers.Main) {
-
-            val credential =viewModel.verifyPhoneNumberWithCode(finalOTP)
+                 val credential =viewModel.verifyPhoneNumberWithCode(finalOTP)
 
                 viewModel.signInWithPhoneAuthCredential(
                         credential
@@ -220,12 +220,15 @@ fun OtpVerifyScreen(
                     when (it) {
                         is ResultState.Success -> {
                             isDialog = false
-                            Log.d(ControlsProviderService.TAG, "sucess: ${it.data}")
+
+                            Toast.makeText(context,"OTP verified  ${it.data } ",Toast.LENGTH_SHORT).show()
+                            navController.navigate(VendigoScreens.LocationScreen.name)
                         }
 
                         is ResultState.Failure -> {
                             isDialog = false
-                            Log.d(ControlsProviderService.TAG, "sucess: ${it.msg}")
+
+                            Toast.makeText(context,"Code is not Correct,try again  ${it.msg} ",Toast.LENGTH_SHORT).show()
                         }
 
                         ResultState.Loading -> {

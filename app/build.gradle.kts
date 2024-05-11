@@ -54,6 +54,13 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    sourceSets {
+        getByName("main") {
+            assets {
+                srcDirs("src\\main\\assets", "src\\main\\assets")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -118,6 +125,10 @@ dependencies {
 
     //splash screen
     implementation(libs.androidx.core.splashscreen)
+
+    //RxJava
+    implementation(libs.rxandroid)
+    implementation(libs.rxjava)
 
     //Material3
     implementation(libs.material3)

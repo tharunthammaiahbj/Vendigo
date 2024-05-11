@@ -10,6 +10,7 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthMissingActivityForRecaptchaException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
@@ -30,6 +31,8 @@ class AuthRepositoryImpl @Inject constructor(
     private var storedVerificationId: String? = ""
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+
+
 
 
     override suspend fun createUserWithPhoneNumber(
@@ -61,15 +64,23 @@ class AuthRepositoryImpl @Inject constructor(
                 // This callback is invoked in an invalid request for verification is made,
                 // for instance if the the phone number format is not valid.
                 Log.w(TAG, "onVerificationFailed", e)
+                try {
+                    if (e is FirebaseAuthInvalidCredentialsException) {
+                        trySend(ResultState.Failure(e))
 
-                if (e is FirebaseAuthInvalidCredentialsException) {
-                    trySend(ResultState.Failure(e))
+                    } else if (e is FirebaseTooManyRequestsException) {
+                        trySend(ResultState.Failure(e))
 
-                } else if (e is FirebaseTooManyRequestsException) {
-                    trySend(ResultState.Failure(e))
+                    }else if (e is FirebaseAuthMissingActivityForRecaptchaException) {
+                         trySend(ResultState.Failure(e))
+                    }
+
 
                 // Show a message and update the UI
             }
+                catch (e:Exception){
+                    Toast.makeText( activity,"unexpected Error in Verification: $e",Toast.LENGTH_SHORT).show()
+                }
             }
 
 
@@ -78,7 +89,7 @@ class AuthRepositoryImpl @Inject constructor(
                 token: PhoneAuthProvider.ForceResendingToken,
             ) {
 
-                Log.d(TAG, "onCodeSent:$verificationId")
+
 
                     super.onCodeSent(verificationId, token)
                     trySend(ResultState.Success("OTP Sent Successfully"))

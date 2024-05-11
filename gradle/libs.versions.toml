@@ -4,6 +4,7 @@ coilCompose = "2.6.0"
 converterGson = "2.9.0"
 coreSplashscreen = "1.1.0-rc01"
 firebaseBom = "32.8.1"
+firebaseUiAuth = "6.2.1"
 foundation = "1.6.6"
 hiltAndroidCompiler = "2.50"
 hiltAndroidGradlePlugin = "2.50"
@@ -33,6 +34,8 @@ constraintlayout = "2.1.4"
 googleServices = "4.4.1"
 firebaseAuth = "22.3.1"
 roomRuntime = "2.6.1"
+rxandroid = "2.1.1"
+rxjava = "2.2.9"
 uiTextGoogleFonts = "1.6.6"
 
 
@@ -53,6 +56,7 @@ androidx-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-f
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-ui-auth = { module = "com.firebaseui:firebase-ui-auth", version.ref = "firebaseUiAuth" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidCompiler" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltAndroidGradlePlugin" }
@@ -82,6 +86,8 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroid" }
+rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

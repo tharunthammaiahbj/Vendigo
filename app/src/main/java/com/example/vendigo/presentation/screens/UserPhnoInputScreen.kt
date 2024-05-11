@@ -1,8 +1,7 @@
 package com.example.vendigo.presentation.screens
 
 import android.app.Activity
-import android.service.controls.ControlsProviderService.TAG
-import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -56,7 +55,7 @@ fun UserPhnoInputScreen(
 
 {
 
-    var phoneNumber = remember {
+    val phoneNumber = remember {
         mutableStateOf("")
     }
 
@@ -161,19 +160,20 @@ fun UserPhnoInputScreen(
                                     controller?.hide()
                                     navController.navigate(VendigoScreens.OtpVerifyScreen.name)
                            scope.launch(Dispatchers.Main) {
+                               val verifyPhoneNumber ="+91${phoneNumber.value}"
                                viewModel.createUserWithPhoneNumber(
-                                   "+91${phoneNumber.value}",
+                                    verifyPhoneNumber ,
                                    activity
                                ).collect {
                                    when (it) {
                                        is ResultState.Success -> {
                                            isDialog = false
-                                           Log.d(TAG, "success: ${it.data}")
+                                           Toast.makeText(context,"success:${it.data}",Toast.LENGTH_SHORT).show()
                                        }
 
                                        is ResultState.Failure -> {
                                            isDialog = false
-                                           Log.d(TAG, "success: ${it.msg}")
+                                           Toast.makeText(context,"Failure:${it.msg}",Toast.LENGTH_SHORT).show()
                                        }
 
                                        ResultState.Loading -> {
