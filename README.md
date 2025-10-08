@@ -10,6 +10,10 @@ Built for: Small businesses, neighborhood stores, local vendors who want to go d
 ✅ Clean UI/UX - Modern, intuitive interface built with Jetpack Compose
 ✅ Secure Authentication - OTP-based phone verification
 
+Website:
+<img width="1912" height="890" alt="Screenshot 2024-02-28 165032" src="https://github.com/user-attachments/assets/927e0b80-6c9e-457c-bf57-0bf5070a68f5" />
+
+
 Frontend: Kotlin, Jetpack Compose, Material Design 3
 Authentication: OTP verification via phone number
 Design: Figma (wireframes and mockups)
