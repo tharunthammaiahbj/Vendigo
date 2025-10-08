@@ -10,8 +10,12 @@ Built for: Small businesses, neighborhood stores, local vendors who want to go d
 ✅ Clean UI/UX - Modern, intuitive interface built with Jetpack Compose
 ✅ Secure Authentication - OTP-based phone verification
 
-Website:
+Website Design:
 <img width="1912" height="890" alt="Screenshot 2024-02-28 165032" src="https://github.com/user-attachments/assets/927e0b80-6c9e-457c-bf57-0bf5070a68f5" />
+
+WireFrame:
+<img width="1172" height="435" alt="Screenshot 2024-05-21 064103" src="https://github.com/user-attachments/assets/26a6d734-b142-4b42-88a9-9ac61c996202" />
+
 
 
 Frontend: Kotlin, Jetpack Compose, Material Design 3
